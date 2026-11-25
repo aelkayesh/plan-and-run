@@ -14,6 +14,8 @@ assert.equal(pkg.license, 'MIT');
 assert.equal(pkg.engines.node, '>=22.13.0');
 assert.equal(Object.keys(pkg.dependencies || {}).length, 0, 'The runner must retain its dependency-free installation.');
 
+assert.equal(await fs.readFile(path.join(root, 'assets/runner/LICENSE'), 'utf8'), await fs.readFile(path.join(root, 'LICENSE'), 'utf8'), 'Generated runtime license must match the distribution notice.');
+
 const skill = await fs.readFile(path.join(root, 'SKILL.md'), 'utf8');
 const frontmatter = skill.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
 assert.ok(frontmatter, 'SKILL.md needs YAML frontmatter.');

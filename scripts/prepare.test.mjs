@@ -8,7 +8,7 @@ import { spawnSync } from 'node:child_process';
 import { validateSpec } from './prepare.mjs';
 
 const script = fileURLToPath(new URL('./prepare.mjs', import.meta.url));
-const runtimeNames = ['runner.mjs', 'protocol.mjs', 'provider-outcome.mjs', 'worker-progress.mjs', 'failure-report.mjs', 'run.mjs', 'recovery.mjs', 'host-validation.mjs', 'automatic-host-validation.mjs', 'host-validation-helper.mjs', 'runtime-reconciliation.mjs', 'runtime-artifacts.mjs', 'subdivision.mjs', 'subdivision-state.mjs', 'acceptance-policy.mjs', 'acceptance-lifecycle.mjs', 'acceptance-adapters.mjs', 'python-dependencies.mjs', 'acceptance-postgres.mjs', 'acceptance-helper.mjs', 'acceptance-fixtures.md', 'background-control.mjs', 'background-ownership.mjs', 'background-child.mjs', 'background-runner.mjs', 'owned-wake.mjs', 'range-preflight.mjs', 'auth-readiness.mjs', 'unattended.mjs', 'unattended-cleanup.mjs'];
+const runtimeNames = ['runner.mjs', 'protocol.mjs', 'provider-outcome.mjs', 'worker-progress.mjs', 'failure-report.mjs', 'run.mjs', 'recovery.mjs', 'host-validation.mjs', 'automatic-host-validation.mjs', 'host-validation-helper.mjs', 'runtime-reconciliation.mjs', 'runtime-artifacts.mjs', 'subdivision.mjs', 'subdivision-state.mjs', 'acceptance-policy.mjs', 'acceptance-lifecycle.mjs', 'acceptance-adapters.mjs', 'python-dependencies.mjs', 'acceptance-postgres.mjs', 'acceptance-helper.mjs', 'acceptance-fixtures.md', 'background-control.mjs', 'background-ownership.mjs', 'background-child.mjs', 'background-runner.mjs', 'owned-wake.mjs', 'range-preflight.mjs', 'auth-readiness.mjs', 'unattended.mjs', 'unattended-cleanup.mjs', 'LICENSE'];
 const spec = {
   title: 'Restore bounded request processing',
   source: '# Request\n\nReject oversized requests before they enter processing, and explain the supported input limit.\n',
@@ -183,6 +183,7 @@ test('creates a complete draft bundle, preserves source edits, and copies only r
   assert.equal(await fs.readFile(path.join(result.bundle, 'worker-contract.md'), 'utf8'), await fs.readFile(path.join(f.skillRoot, 'references', 'runner-contract.md'), 'utf8'));
   assert.deepEqual((await fs.readdir(path.join(result.bundle, 'runner'))).sort(), [...runtimeNames].sort());
   for (const name of runtimeNames) assert.deepEqual(await fs.readFile(path.join(result.bundle, 'runner', name)), await fs.readFile(path.join(f.skillRoot, 'assets', 'runner', name)));
+  assert.equal(await fs.readFile(path.join(result.bundle, 'runner', 'LICENSE'), 'utf8'), await fs.readFile(fileURLToPath(new URL('../LICENSE', import.meta.url)), 'utf8'), 'Generated runtime must retain the distribution license notice');
   const manifest = JSON.parse(await fs.readFile(path.join(result.bundle, 'runner-manifest.json'), 'utf8'));
   assert.equal(manifest.schema_version, 1);
   assert.equal(manifest.plan_id, f.slug);

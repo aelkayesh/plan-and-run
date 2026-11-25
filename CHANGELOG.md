@@ -4,7 +4,7 @@
 
 First standalone source release of the Plan and Run Codex skill.
 
-- Saved plans with bounded packages, shared contracts and portable runner bundles.
+- Saved plans with bounded packages, shared contracts and portable runner bundles that retain the MIT license notice.
 - Sequential execution, receipts and handoffs, resumable state, bounded recovery and provider-aware cooldowns.
 - Optional background execution and fixed strict acceptance adapters.
 - Public installation guidance, example plans, a synthetic selected-range resume demo and fake-worker regression tests.

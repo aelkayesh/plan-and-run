@@ -14,6 +14,6 @@ No `npm install` is required. Tests create temporary repositories and fake Codex
 
 Preserve selected package ranges, authorization boundaries, finite budgets, accepted evidence and interrupted state. Do not make a failed or skipped acceptance gate pass by relaxing the receipt checks. Treat changes to state formats, authentication, host execution and runtime reconciliation as compatibility changes and explain their migration impact.
 
-Generated bundles contain pinned runtime copies. Updating this repository does not upgrade someone else's saved plan. Review [the runtime contract](references/runner-contract.md) before changing that lifecycle.
+Generated bundles contain pinned runtime copies and the MIT license notice; preserve that notice when redistributing them. Updating this repository does not upgrade someone else's saved plan. Review [the runtime contract](references/runner-contract.md) before changing that lifecycle.
 
 Please open an issue before a broad adapter or architecture change. This is an early project; response times and support are best effort. Contributions are under the repository's [MIT license](LICENSE).
