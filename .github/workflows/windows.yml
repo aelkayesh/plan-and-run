@@ -1,0 +1,19 @@
+name: Verify Windows WSL2 launcher
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  launcher:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Check PowerShell launcher routing with fake WSL
+        shell: pwsh
+        run: ./scripts/windows-launcher.test.ps1

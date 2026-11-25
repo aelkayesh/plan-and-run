@@ -31,7 +31,7 @@ The default mode validates completion records and declared checks. Strict mode a
 
 ## Requirements
 
-- macOS or Linux; Windows is not supported.
+- macOS, Linux, or **Windows through WSL2**. See the [Windows setup and PowerShell launcher](references/windows.md). Native Windows Node.js execution is not supported.
 - Node.js **22.13+** and Git. No npm dependencies are required for the core runner or test suite.
 - Codex CLI with local authentication that the preflight probe supports. The CLI contract was checked against **0.167.0**.
 - A target Git repository with an existing commit.
@@ -51,6 +51,8 @@ The demo creates a temporary Git repository, uses the real generator and runner 
 This demonstrates selected-range resume, not interrupted-worker recovery, automatic retry behavior or AI implementation quality. No Codex login, model call or dependency installation is needed. See [the output](examples/demo-output.txt) and [the demo source](scripts/demo.mjs).
 
 ## Install the skill
+
+On Windows, follow the [WSL2 setup](references/windows.md) and run the shell commands inside your Linux distribution.
 
 Clone into your user skill directory. This command refuses to replace an existing installation, including a symlink:
 
@@ -135,6 +137,6 @@ npm run demo
 npm test
 ```
 
-The suite uses temporary repositories and fake Codex workers; it does not call a model. CI is configured for Node 22 and 24 on macOS and Linux. Consult the actual CI run for results on a specific revision.
+The suite uses temporary repositories and fake Codex workers; it does not call a model. CI covers Node 22 and 24 on macOS/Linux, plus native Windows tests for the PowerShell WSL2 launcher. Launcher tests use a fake WSL executable; they do not establish a complete WSL2 feature run. Consult the actual CI runs for results on a specific revision.
 
 Useful feedback is a small reproducible case: a plan that did not resume as expected, a misleading diagnostic, or a missing adapter with a concrete use case. See [contributing](CONTRIBUTING.md), [security](SECURITY.md), [release notes](CHANGELOG.md) and the [full execution contract](references/runner-contract.md).

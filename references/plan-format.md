@@ -1,6 +1,6 @@
 # Authoring a runnable plan
 
-Inspect the user's intended outcome, repository and existing authoritative plan first. The runtime supports macOS/Linux, Node.js 22.13+ and Git worktrees with an existing HEAD. Do not silently initialize or commit a user's project.
+Inspect the user's intended outcome, repository and existing authoritative plan first. The runtime supports macOS/Linux (including [Windows through WSL2](windows.md)), Node.js 22.13+ and Git worktrees with an existing HEAD. Do not silently initialize or commit a user's project.
 
 Write a specification JSON with complete Markdown strings, not file paths:
 

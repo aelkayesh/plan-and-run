@@ -1,6 +1,6 @@
 # Sequential Codex execution contract
 
-The runner executes one package at a time, resumes interrupted conversations and advances only after validating completion records. Requirements: macOS/Linux, Node.js 22.13+, Git with an existing HEAD, and authenticated Codex CLI. Existing model/provider configuration is used unless overridden; worker calls consume its quota or API budget.
+The runner executes one package at a time, resumes interrupted conversations and advances only after validating completion records. Requirements: macOS/Linux (including [Windows through WSL2](windows.md)), Node.js 22.13+, Git with an existing HEAD, and authenticated Codex CLI. Existing model/provider configuration is used unless overridden; worker calls consume its quota or API budget.
 
 ## Commands
 

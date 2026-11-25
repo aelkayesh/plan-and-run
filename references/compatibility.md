@@ -1,6 +1,6 @@
 # Compatibility and adapter scope
 
-The generic workflow needs macOS or Linux, Node.js 22.13 or newer, Git with an existing HEAD, and a compatible authenticated Codex CLI. CLI argument parsing was checked against 0.167.0. New CLI versions can change output or session behavior; run the tests and a bounded task before relying on a new version. Windows is not supported.
+The generic workflow needs macOS or Linux, Node.js 22.13 or newer, Git with an existing HEAD, and a compatible authenticated Codex CLI. CLI argument parsing was checked against 0.167.0. New CLI versions can change output or session behavior; run the tests and a bounded task before relying on a new version. Windows is supported through WSL2 with Linux tools, authentication and project files in one distribution; see the [Windows guide](windows.md). Native Windows Node.js execution remains unsupported because process ownership and cleanup use POSIX primitives.
 
 Preparation, dry-run and status do not call a model. Preflight also uses no inference: it inspects local readiness and writes a private report. It cannot prove remote authorization or available quota. It supports stored-login checks, selected provider environment credentials and one fixed Azure CLI user-auth shape. Arbitrary custom authentication commands, unsupported credential stores and unresolved repository provider/profile overrides stop with diagnostics. Preserve the existing authentication configuration when resolving a blocker; see the [authentication contract](runner-contract.md#preflight-background-ownership-and-results).
 

@@ -17,7 +17,7 @@ Turn the requested work into a durable multistep plan and a CLI that executes it
 
 ## Prepare
 
-1. Confirm the actual checkout, repository instructions and existing changes. Find any authoritative plan before creating another. Preserve unrelated edits, data and active services.
+1. Confirm the actual checkout, repository instructions and existing changes. Find any authoritative plan before creating another. Preserve unrelated edits, data and active services. On Windows, follow [the WSL2 guide](references/windows.md) and execute the runner with Linux tools in the same distribution as the project.
 2. Save independently executable packages with prerequisites, bounded deliverables, actual checks, acceptance gates, scope limits and handoffs. Use the smallest useful number of packages and include integrated acceptance when needed. Break large work at testable boundaries.
    For acceptance-driven autonomy, author an explicit strict profile with original criterion IDs/types/purposes and required typed gates. Workers propose mappings; fixed parent adapters and fresh read-only semantic review decide acceptance. Read [adapter scope](references/compatibility.md#optional-strict-acceptance) and the generated runtime `acceptance-fixtures.md` before selecting those capabilities. Omission retains legacy receipt verification.
 3. State task-specific constraints and already-granted authority in a shared contract. Use `manual: true` only for a genuinely unresolved decision or external authorization, not a fixed package number. Such a boundary must not prevent earlier authorized work.
