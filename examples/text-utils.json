@@ -1,0 +1,26 @@
+{
+  "title": "Build a small text utility",
+  "source": "# Request\n\nIn this disposable example repository, create a dependency-free JavaScript utility that normalizes a display name. Trim whitespace at both ends and collapse internal whitespace to one space. Reject non-string inputs with a TypeError. Preserve letter case and punctuation. Provide a command-line wrapper that prints the normalized first argument and exits nonzero with a helpful message when no argument is supplied.\n",
+  "contract": "# Shared contract\n\nThis example is for a new disposable Git repository with an existing HEAD, Node.js 22.13+ and a locally authenticated Codex CLI. Preserve existing files if this example is adapted to another repository. Do not install dependencies, contact external services, commit, push or deploy. Implement only the utility and CLI described in the request. Use node:test with synthetic strings and subprocess fixtures; no real user data.\n\nUse legacy receipt verification and meaningful package checks. No host recipes or strict adapters are selected. Keep the original request and package plans fixed once execution starts. Inspect partial files before retrying. Every required check must actually pass; a skipped or unknown check is not completion. Worker receipts and handoffs must use the paths specified by their package and the current attempt identity supplied by the runner.\n",
+  "recovery": {
+    "schema_version": 1,
+    "packages": {
+      "01": { "local_repair": true, "recipes": [] },
+      "02": { "local_repair": true, "recipes": [] }
+    }
+  },
+  "steps": [
+    {
+      "id": "01",
+      "title": "Implement and test display-name normalization",
+      "manual": false,
+      "plan": "# Package 01\n\nPrerequisites: read the request and shared contract, inspect Git status and confirm Node.js 22.13+ is installed.\n\nCreate src/normalize-name.mjs exporting normalizeName(value). It must accept a string, trim leading/trailing whitespace, collapse every internal run of whitespace to one ASCII space, and preserve letter case and punctuation. An empty or whitespace-only string becomes an empty string. Non-string values throw TypeError; do not silently coerce them.\n\nCreate test/normalize-name.test.mjs with independent node:test assertions for already-normalized input, leading/trailing whitespace, mixed spaces/tabs/newlines, empty input, whitespace-only input, preserved case/punctuation, and non-string rejection including null and a number.\n\nRun node --test test/normalize-name.test.mjs and node --check src/normalize-name.mjs. Record their actual outcomes. Use only synthetic strings; no dependencies, network calls, CLI wrapper, commits or publication in this package.\n\nWrite docs/implementation-plans/text-utils/01-validation.json and 01-handoff.md with the current package/attempt identity, source identity, commands, fixture description, limitations and next action. Package 02 adds a CLI and end-to-end tests; passing this package does not establish CLI behavior.\n"
+    },
+    {
+      "id": "02",
+      "title": "Add the command-line interface and integrated checks",
+      "manual": false,
+      "plan": "# Package 02\n\nPrerequisites: inspect package 01's accepted receipt and handoff and current source. Preserve the accepted normalizer behavior and original acceptance.\n\nCreate bin/normalize-name.mjs that imports normalizeName, takes the first command-line argument, prints the normalized value followed by a newline, and exits zero. If no argument is supplied, print a concise usage message to stderr and exit nonzero. An explicitly supplied empty string is valid. Do not join later arguments or change the normalization contract.\n\nCreate test/cli.test.mjs using spawnSync(process.execPath, ...) to verify normalized stdout, exact newline, zero success exit, explicitly empty argument, and missing-argument nonzero exit with stderr usage text. Use synthetic inputs only. Add a short README.md with invocation examples and the complete test command.\n\nRun node --test test/*.test.mjs, node --check bin/normalize-name.mjs and node bin/normalize-name.mjs '  Ada   Lovelace  '. Confirm the last command prints Ada Lovelace followed by a newline. Every required assertion must pass. Do not install dependencies, contact services, commit, push or deploy.\n\nWrite docs/implementation-plans/text-utils/02-validation.json and 02-handoff.md with actual checks, current package/attempt/source identity, synthetic fixture details and remaining limitations. This is a small local example, not production software validation.\n"
+    }
+  ]
+}

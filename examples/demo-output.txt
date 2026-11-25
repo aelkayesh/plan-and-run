@@ -1,0 +1,7 @@
+Synthetic resume demo — no model calls or live authentication.
+1. Generated a plan, relocated it before execution, and removed its temporary skill copy.
+2. Dry-run and preflight passed without starting a worker.
+3. First run accepted package 01; package 02 was outside the selected range.
+4. Resume skipped package 01 and ran package 02 only; the original receipt stayed unchanged.
+5. Both arithmetic checks passed again against the final files.
+6. Temporary repository and configuration removed.

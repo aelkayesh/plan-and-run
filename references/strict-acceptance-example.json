@@ -1,0 +1,115 @@
+{
+  "title": "Prevent stale settings writes and explain conflicts",
+  "source": "# Request\n\nReject a settings update whose version is stale. Preserve the saved value, deny cross-account writes, and show a conflict with a reload action. Validate persistence and the production browser flow locally. Deployment requires a separate decision.\n",
+  "contract": "# Shared contract\n\nOnly local implementation and owned synthetic acceptance are authorized. Preserve original data, unrelated work and accepted evidence. Do not deploy, install dependencies, use existing databases or make real provider/invitation calls. The selected range is packages 01 through 15. Before work, preflight installed npm/Vitest/TypeScript/Next/playwright-core, a supported local Chrome/Chromium, local Docker with preinstalled pgvector/pgvector:pg17, and the selected Codex executable/profile authentication. Original criteria below cannot be weakened. Future mapping files and SQL/browser tests are implementation deliverables. Fixed parent adapters own commands, loopback ports, UUID-marked fixtures and cleanup.\n",
+  "recovery": {
+    "schema_version": 1,
+    "packages": {
+      "01": {
+        "local_repair": true,
+        "recipes": [
+          "npm-checks"
+        ]
+      },
+      "15": {
+        "local_repair": true,
+        "recipes": [
+          "npm-checks"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "schema_version": 1,
+    "mode": "strict",
+    "packages": {
+      "01": {
+        "required_gates": [
+          {
+            "id": "npm",
+            "capability": "npm-checks"
+          },
+          {
+            "id": "sql",
+            "capability": "synthetic-postgres"
+          }
+        ],
+        "criteria": [
+          {
+            "id": "reject-stale-settings-version",
+            "type": "persistence",
+            "purpose": "An update with an older version returns a conflict; reading the record returns the original value and version on both local and PostgreSQL storage.",
+            "gate_ids": [
+              "npm",
+              "sql"
+            ]
+          },
+          {
+            "id": "deny-cross-account-settings-write",
+            "type": "security",
+            "purpose": "A user cannot update another account settings record; denial leaves the original record unchanged.",
+            "gate_ids": [
+              "npm",
+              "sql"
+            ]
+          }
+        ]
+      },
+      "15": {
+        "required_gates": [
+          {
+            "id": "npm",
+            "capability": "npm-checks"
+          },
+          {
+            "id": "build",
+            "capability": "production-build"
+          },
+          {
+            "id": "browser",
+            "capability": "loopback-browser"
+          }
+        ],
+        "criteria": [
+          {
+            "id": "show-reloadable-settings-conflict",
+            "type": "ui",
+            "purpose": "After a competing update, submitting stale settings displays a conflict and reload action; reloading shows the saved value, and no success message appears for the rejected write.",
+            "gate_ids": [
+              "npm",
+              "browser"
+            ]
+          },
+          {
+            "id": "build-installed-production-app",
+            "type": "build",
+            "purpose": "The existing production build passes from an isolated checkout using installed dependencies and no downloads.",
+            "gate_ids": [
+              "build"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "steps": [
+    {
+      "id": "01",
+      "title": "Reject stale and unauthorized settings writes",
+      "manual": false,
+      "plan": "# Package 01\n\nInspect existing versioned storage behavior and preserve unrelated changes. Implement stale-version rejection and cross-account authorization on local and PostgreSQL adapters. Add real positive and negative cases, with tests/acceptance/01/*.postgres.test.ts using the parent marker and rollback convention. Create 01-acceptance-mapping.json mapping every frozen criterion/gate pair to actual assertion IDs and every required suite case. Run npm test and npm run check; parent must independently review the mapping, execute both frozen gates, verify zero required skips and owned fixture cleanup. Write 01-validation.json and 01-handoff.md with actual source/check/fixture evidence and remaining limitations. Next is package 15, only when scheduled by the outer runner.\n"
+    },
+    {
+      "id": "15",
+      "title": "Show a usable conflict state and verify production behavior",
+      "manual": false,
+      "plan": "# Package 15\n\nVerify accepted package 01 evidence. Implement the conflict/reload state without a success notification on rejected writes. Add tests/acceptance/15/*.browser.mjs with two synthetic personas, a competing update, rendered conflict evidence and reload assertions. Author complete 15-acceptance-mapping.json for all npm/build/browser criterion pairs. Run npm test, npm run check and the production build; the parent runs the fixed installed-browser harness against its isolated current build and verifies artifact/source identities and cleanup. Write 15-validation.json and 15-handoff.md from actual results. Stop before explicit manual package 45.\n"
+    },
+    {
+      "id": "45",
+      "title": "Decide whether to deploy",
+      "manual": true,
+      "plan": "# Package 45\n\nManual boundary: review local acceptance evidence and obtain a separate deployment decision. Local launch does not authorize deployment. No worker may execute this package.\n"
+    }
+  ]
+}
